@@ -34,8 +34,9 @@ const authenticate = async (req, res, next) => {
 				error: "You're not allowed in here!"
 			});
 		}
-	} catch {
-		res.status(500).json("Encountered an error.");
+	} catch (err) {
+		console.log(err);
+		res.status(500).json("Encountered an error: " + err);
 	}
 };
 
