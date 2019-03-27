@@ -4,16 +4,14 @@ const User = require("../users/userModel");
 const config = require("../config");
 
 const authenticate = async (req, res, next) => {
-	const token = req.get("Authorization");
+	let token = req.get("Authorization");
 	const username = req.get("username");
 	const password = req.get("password");
 	try {
-		console.log(token === true, token !== undefined);
 		if (token !== undefined) {
 			token = token.replace("Bearer ", "");
 			jwt.verify(token, config.secret, (err, decoded) => {
 				if (err) return res.status(422).json(err);
-				console.log("decoding next");
 				req.decoded = decoded;
 				next();
 			});
