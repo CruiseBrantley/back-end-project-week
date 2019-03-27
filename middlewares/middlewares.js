@@ -8,7 +8,8 @@ const authenticate = async (req, res, next) => {
 	const username = req.get("username");
 	const password = req.get("password");
 	try {
-		if (token) {
+		console.log(token === true, token !== undefined);
+		if (token !== undefined) {
 			token = token.replace("Bearer ", "");
 			jwt.verify(token, config.secret, (err, decoded) => {
 				if (err) return res.status(422).json(err);
