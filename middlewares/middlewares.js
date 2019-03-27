@@ -5,6 +5,7 @@ const config = require("../config");
 
 const authenticate = async (req, res, next) => {
 	const token = req.get("Authorization");
+	console.log(token, config.secret);
 	const username = req.get("username");
 	const password = req.get("password");
 	try {
