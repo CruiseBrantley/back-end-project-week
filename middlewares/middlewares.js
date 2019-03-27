@@ -5,7 +5,6 @@ const config = require("../config");
 
 const authenticate = async (req, res, next) => {
 	const token = req.get("Authorization");
-	console.log(token, config.secret);
 	const username = req.get("username");
 	const password = req.get("password");
 	try {
@@ -13,6 +12,7 @@ const authenticate = async (req, res, next) => {
 			token = token.replace("Bearer ", "");
 			jwt.verify(token, config.secret, (err, decoded) => {
 				if (err) return res.status(422).json(err);
+				console.log("decoding next");
 				req.decoded = decoded;
 				next();
 			});
